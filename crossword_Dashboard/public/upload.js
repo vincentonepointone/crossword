@@ -3,7 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let wordCount = 0;
   // HTML elements
   const addButton = document.getElementById("addButton");
+  const getDataButton = document.getElementById("getDataButton");
   const generateButton = document.getElementById("generateButton");
+  const dataContainer = document.getElementById("dataContainer");
+
   const wordList = document.getElementById("wordList");
   const clueList = document.getElementById("clueList");
   const crosswordArrayOfObjects = [];
@@ -19,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   let showModal = (message, title) => {
     modalTitle.innerText = title;
-    modalMessage.innerText = message;
+    modalMessage.innerHTML = message;
     modal.show();
   }
 
@@ -39,41 +42,42 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("end of function");
   });
 
-  // generateButton.addEventListener("click", () => {
-  //   fetch(serverURL, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(crosswordArrayOfObjects),
-  //   })
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((responseData) => {
-  //       console.log("Server response:", responseData);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error:", error);
-  //     });
+  generateButton.addEventListener("click", () => {
+    fetch(serverURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(crosswordArrayOfObjects),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((responseData) => {
+        console.log("Server response:", responseData);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
 
-  //     showModal(
-  //       "Your crossword puzzle was created and saved to the database.",
-  //       "Crossword puzzle generated"
-  //     );
-  // });
+      showModal(
+        "Crossword puzzle generated.",
+        `<a hreff="./">Link to the crossword page<a/>" Scroll to the bottom! `
+      );
+  });
 
-    generateButton.addEventListener("click", () => {
+    getDataButton.addEventListener("click", () => {
     fetch("/api/puzzle")
       .then((response) => response.json())
       .then((data) => {
         // Assuming the data received is a JSON object
         // You can customize this based on your API response format
-        const dataContainer = document.body;
-        dataContainer.innerHTML = JSON.stringify(data);
+        console.log(data)
+      dataContainer.innerText = JSON.stringify(data);
+      dataContainer.style.marginBottom = "300px";
       })
       .catch((error) => {
         console.error("Error fetching data:", error);

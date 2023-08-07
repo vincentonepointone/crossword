@@ -3,7 +3,7 @@ const cors = require("cors");
 const path = require("path");
 var clg = require("crossword-layout-generator");
 const app = express();
-const port = process.env.PORT || 1379;; // Change this to any desired port number
+const port = process.env.PORT || 1379; // Change this to any desired port number
 app.use(express.json());
 app.use(cors());
 const mysql = require("mysql");
@@ -44,6 +44,7 @@ app.post("/post", (req, res) => {
     }
 
     addAcrossClue(number, clue, answer, row, col) {
+      console.log(number);
       this.across[number] = { clue, answer, row, col };
     }
 
@@ -57,7 +58,7 @@ app.post("/post", (req, res) => {
     // console.log(wordObject)
     if (wordObject.orientation === "across") {
       crossword.addAcrossClue(
-        wordObject.position,
+       parseInt(wordObject.position),
         wordObject.clue,
         wordObject.answer,
         wordObject.starty,
@@ -65,7 +66,7 @@ app.post("/post", (req, res) => {
       );
     } else {
       crossword.addDownClue(
-        wordObject.position,
+        parseInt(wordObject.position),
         wordObject.clue,
         wordObject.answer,
         wordObject.starty,
@@ -74,11 +75,12 @@ app.post("/post", (req, res) => {
     }
   });
 
-  const { puzzleData } = crossword; // Assuming puzzleData is the JSON data containing the puzzle information
+  const { puzzleData } = JSON.stringify(crossword);  // Assuming puzzleData is the JSON data containing the puzzle information
   // You can validate the puzzleData here to ensure it contains the necessary properties and data
   console.log(crossword);
   const INSERT_PUZZLE_QUERY = "INSERT INTO puzzles (data) VALUES (?)";
-  const values = [JSON.stringify(crossword)];
+  const values = JSON.stringify(crossword);
+  console.log(values)
 
   pool.query(INSERT_PUZZLE_QUERY, values, (error, results) => {
     if (error) {
@@ -92,7 +94,7 @@ app.post("/post", (req, res) => {
 app.get("/api/puzzle", (req, res) => {
   console.log("get Api hit");
   // Fetch puzzle data from the database
-  const SELECT_PUZZLE_QUERY = "SELECT data FROM puzzles";
+  const SELECT_PUZZLE_QUERY = "SELECT data FROM puzzles ORDER BY id DESC";
 
   pool.query(SELECT_PUZZLE_QUERY, (error, results) => {
     if (error) {
@@ -104,7 +106,7 @@ app.get("/api/puzzle", (req, res) => {
 
     // Assuming 'data' is the column name in the 'puzzles' table that stores the JSON puzzle data
     const puzzleData = results.map((row) => JSON.parse(row.data));
-
+    console.log(puzzleData)
     // Return the fetched puzzle data as JSON response
     res.status(200).json(puzzleData);
   });
@@ -131,3 +133,7 @@ app.listen(port, () => {
 //     answer: "interface",
 //   },
 // ];
+
+
+
+

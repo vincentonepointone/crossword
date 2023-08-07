@@ -1,23 +1,39 @@
-.container {
-    display: flex;
-    justify-content: space-between;
-    
+h1 {
+  text-align: center;
+  margin-bottom: 3rem;
 }
 
+.direction {
+  margin-bottom: 0.5rem !important;
+}
+.crossword {
+  display: flex;
+  flex-direction: column;
+  width: 35vw;
+}
+
+.crossword-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 /* Phones (up to 767px) */
 @media (max-width: 767px) {
-  .container {
+  .crossword {
+    width: 95vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
+  }
 }
 
 /* Tablets (768px to 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
-  .container {
+  .crossword {
+    width: 70vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
+  }
 }
