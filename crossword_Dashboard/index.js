@@ -3,7 +3,7 @@ const cors = require("cors");
 const path = require("path");
 var clg = require("crossword-layout-generator");
 const app = express();
-const port = process.env.PORT || 1379; // Change this to any desired port number
+const port = process.env.PORT || 3000; // Change this to any desired port number
 app.use(express.json());
 app.use(cors());
 const mysql = require("mysql");
