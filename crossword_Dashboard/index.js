@@ -10,10 +10,10 @@ const mysql = require("mysql");
 
 const pool = mysql.createPool({
   connectionLimit: 10, // Adjust this number based on your application's needs
-  host: "127.0.0.1",
-  user: "crossword1",
-  password: "username",
-  database: "crossword",
+  host: "localhost",
+  user: "puzzle",
+  password: "e9a1f083dcf4789a7d886f8c4b3af00941b537a76bde6faa",
+  database: "puzzle",
 });
 
 // Serve static files from the "public" folder
