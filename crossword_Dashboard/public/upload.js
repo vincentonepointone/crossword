@@ -3,9 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let wordCount = 0;
   // HTML elements
   const addButton = document.getElementById("addButton");
-  const getDataButton = document.getElementById("getDataButton");
+  // const getDataButton = document.getElementById("getDataButton");
   const generateButton = document.getElementById("generateButton");
-  const dataContainer = document.getElementById("dataContainer");
+  // const dataContainer = document.getElementById("dataContainer");
 
   const wordList = document.getElementById("wordList");
   const clueList = document.getElementById("clueList");
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   addButton.addEventListener("click", (e) => {
-    console.log("click");
+
     wordCount++;
     let wordObject = {
       clue: clue.value,
@@ -39,7 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
         <li class="list-group-item list-group-item-secondary">${wordCount})  ${word.value}</li>
       `;
     clueList.innerHTML += `<li class="list-group-item list-group-item-secondary">${wordCount})  ${clue.value}</li>`;
-    console.log("end of function");
+        clue.value = "";
+        word.value = "";
   });
 
   generateButton.addEventListener("click", () => {
@@ -64,25 +65,25 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       showModal(
-        "Crossword puzzle generated.",
-        `<a hreff="./">Link to the crossword page<a/>" Scroll to the bottom! `
+        `<a class="btn btn-secondary" href="./" role="button">Crosswords Page</a>`,
+        `Crossword Puzzle generated view it on the crosswords page`
       );
   });
 
-    getDataButton.addEventListener("click", () => {
-    fetch("/api/puzzle")
-      .then((response) => response.json())
-      .then((data) => {
-        // Assuming the data received is a JSON object
-        // You can customize this based on your API response format
-        console.log(data)
-      dataContainer.innerText = JSON.stringify(data);
-      dataContainer.style.marginBottom = "300px";
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-    });
+    // getDataButton.addEventListener("click", () => {
+    // fetch("/api/puzzle")
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     // Assuming the data received is a JSON object
+    //     // You can customize this based on your API response format
+    //     console.log(data)
+    //   dataContainer.innerText = JSON.stringify(data);
+    //   dataContainer.style.marginBottom = "300px";
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching data:", error);
+    //   });
+    // });
   
 
 

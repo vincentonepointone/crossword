@@ -55,16 +55,25 @@ app.post("/post", (req, res) => {
 
   const crossword = new Crossword();
   output_json.forEach((wordObject) => {
-    // console.log(wordObject)
-    if (wordObject.orientation === "across") {
+    console.log(wordObject.startx)
+    if (
+      wordObject.orientation === "across" &&
+      wordObject.position != NaN &&
+      wordObject.startx != undefined &&
+      wordObject.starty != undefined
+    ) {
       crossword.addAcrossClue(
-       parseInt(wordObject.position),
+        parseInt(wordObject.position),
         wordObject.clue,
         wordObject.answer,
         wordObject.starty,
         wordObject.startx
       );
-    } else {
+    } else if (
+      wordObject.position != NaN &&
+      wordObject.startx != undefined &&
+      wordObject.starty !=  undefined
+    ) {
       crossword.addDownClue(
         parseInt(wordObject.position),
         wordObject.clue,

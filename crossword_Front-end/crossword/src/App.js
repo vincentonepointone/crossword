@@ -8,7 +8,10 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="bg-danger">Crossword Puzzle</h1>
+      <h1 className="bg-primary p-3 text-light">Crossword Puzzle's</h1>
+        <div className="d-flex justify-content-center mb-5">
+            <a className="btn btn-dark" href="./admin.html" role="button">Create Crossword Puzzle</a>
+        </div>
       <Puzzle />
     </div>
   );
