@@ -1,0 +1,21 @@
+{
+  "name": "crossword",
+  "version": "1.0.0",
+  "description": "A croosword Generating serverless function",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index"
+  },
+  "keywords": [
+    "crossword",
+    "serverless"
+  ],
+  "author": "Vincent du Plessis",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "crossword-layout-generator": "^0.1.1",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1"
+  }
+}
